@@ -56,6 +56,7 @@ namespace EmployeeService
 
                 string expressionForNumbers = @"^/api/v1/Employee/\d+$";
                 string expressionForDepartment = @"^/api/v1/Employee/.+,.+$";
+                //Get api/v1/Employee/CompanyId
                 if (Regex.IsMatch(path, expressionForNumbers) && request.Method == "GET")
                 {
                     int? param = Convert.ToInt32(path.Split("/")[4]);
@@ -67,6 +68,7 @@ namespace EmployeeService
                     else
                         response.StatusCode = 402;
                 }
+                //Get api/v1/Employee/Department
                 else if (Regex.IsMatch(path, expressionForDepartment) && request.Method == "GET")
                 {
                     string param = path.Split('/')[4];
@@ -86,6 +88,7 @@ namespace EmployeeService
                 {
                     await UpdateEmployeeAsync(response, request);
                 }
+                //Get api/v1/Employee/EmployeeId
                 else if (Regex.IsMatch(path, expressionForNumbers) && request.Method == "DELETE")
                 {
                     int? param = Convert.ToInt32(path.Split('/')[4]);
