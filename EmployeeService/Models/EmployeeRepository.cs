@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Dapper;
+using EmployeeService.Interfaces;
+using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using EmployeeService.Interfaces;
-using System.Data;
-using Microsoft.Data.SqlClient;
-using Dapper;
 
 namespace EmployeeService.Models
 {
@@ -44,7 +43,7 @@ namespace EmployeeService.Models
 
                 var sqlQuery = $@"SELECT Name, Surname, Phone, CompanyId, Passport, Department
                                          FROM Employee WHERE CompanyId = @CompanyId";
-                
+
                 EmployeeDTO[] employees = connection.QueryAsync<EmployeeDTO>(sqlQuery, new { CompanyId }).GetAwaiter().GetResult().ToArray();
                 return Employee.FromDTO(employees);
             }
@@ -55,7 +54,7 @@ namespace EmployeeService.Models
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var sqlQuery = $@"SELECT * FROM Employee WHERE Department = @Department";
-                var query = await connection.QueryMultipleAsync(sqlQuery, new { department});
+                var query = await connection.QueryMultipleAsync(sqlQuery, new { department });
                 var result = Employee.FromDTO(await query.ReadAsync<EmployeeDTO>());
                 return result;
             }

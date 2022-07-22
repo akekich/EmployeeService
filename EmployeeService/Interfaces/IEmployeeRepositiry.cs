@@ -1,12 +1,10 @@
-﻿using System;
+﻿using EmployeeService.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using EmployeeService.Models;
 
 namespace EmployeeService.Interfaces
 {
-    interface IEmployeeRepositiry
+    public interface IEmployeeRepositiry
     {
         public Task<int> Create(Employee employee);
         public Task Delete(int id);

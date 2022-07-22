@@ -15,7 +15,8 @@ namespace EmployeeService.Models
 
         public static Employee FromDTO(EmployeeDTO dto)
         {
-            return new Employee {
+            return new Employee
+            {
                 Id = dto.Id,
                 Name = dto.Name,
                 Surname = dto.Surname,
@@ -28,7 +29,7 @@ namespace EmployeeService.Models
         public static IEnumerable<Employee> FromDTO(IEnumerable<EmployeeDTO> dto)
         {
             List<Employee> result = new List<Employee>();
-            foreach(var item in dto)
+            foreach (var item in dto)
             {
                 result.Add(new Employee
                 {
